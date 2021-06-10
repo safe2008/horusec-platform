@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"math/rand"
+	"net/url"
 	"strings"
 	"time"
 
@@ -129,7 +130,8 @@ func (u *UseCases) NewAccountValidationEmail(account *accountEntities.Account) [
 }
 
 func (u *UseCases) getAccountValidationEmailURL(accountID uuid.UUID) string {
-	return fmt.Sprintf("%s/auth/account/validate/%s", u.appConfig.GetHorusecAuthURL(), accountID)
+	url, _ := url.Parse(u.appConfig.GetHorusecAuthURL())
+	return fmt.Sprintf("%s/auth/account/validate/%s", url.Host, accountID)
 }
 
 func (u *UseCases) EmailFromIOReadCloser(body io.ReadCloser) (*accountEntities.Email, error) {
@@ -166,8 +168,8 @@ func (u *UseCases) NewResetPasswordCodeEmail(account *accountEntities.Account, c
 }
 
 func (u *UseCases) getResetPasswordCodeEmailURL(email, code string) string {
-	return fmt.Sprintf("%s/auth/recovery-password/check-code?email=%s&code=%s",
-		u.appConfig.GetHorusecManagerURL(), email, code)
+	url, _ := url.Parse(u.appConfig.GetHorusecManagerURL())
+	return fmt.Sprintf("%s/auth/recovery-password/check-code?email=%s&code=%s", url.Host, email, code)
 }
 
 func (u *UseCases) ResetCodeDataFromIOReadCloser(body io.ReadCloser) (*accountEntities.ResetCodeData, error) {

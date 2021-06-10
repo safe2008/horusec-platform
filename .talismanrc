@@ -1,3 +1,3 @@
 fileignoreconfig:
-- filename: deployments/helm/horusec-platform/values.yaml
-  checksum: 16a6ac86da601ae1c504b54b0b337e955b7fd32e8cce38677316e4198c22908f
+- filename: auth/internal/usecases/account/account.go
+  checksum: 876ecff0a1dd92d8935132d43df27587dfc3dca1011708545bc927c257ddd5e0
